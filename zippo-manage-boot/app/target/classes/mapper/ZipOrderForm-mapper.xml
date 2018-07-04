@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jianwu.dao.ZipOrderFormDao" >
+  <resultMap id="BaseResultMap" type="com.jianwu.domain.ZipOrderForm" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_picture" property="commodityPicture" jdbcType="VARCHAR" />
+    <result column="wechat_user_id" property="wechatUserId" jdbcType="INTEGER" />
+    <result column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="total_amount" property="totalAmount" jdbcType="DOUBLE" />
+    <result column="express" property="express" jdbcType="DOUBLE" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="tracking_type" property="trackingType" jdbcType="VARCHAR" />
+    <result column="tracking_number" property="trackingNumber" jdbcType="VARCHAR" />
+    <result column="express_type" property="expressType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sent_time" property="sentTime" jdbcType="TIMESTAMP" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="texture_id" property="textureId" jdbcType="INTEGER" />
+    <result column="technology" property="technology" jdbcType="INTEGER" />
+    <result column="optimal_scale" property="optimalScale" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      id, order_date, commodity_id, commodity_name, commodity_picture, wechat_user_id,
+      address_id, address, number, price, total_amount, express, order_number, tracking_type,
+      tracking_number, express_type, status, sent_time, pay_time, texture_id, technology,
+      optimal_scale, create_time, update_time
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jianwu.example.ZipOrderFormExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zip_order_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    id,order_date,commodity_id,commodity_name,commodity_picture,wechat_user_id,address_id,address,number,price,total_amount,express,order_number,tracking_type,tracking_number,express_type,status,sent_time,pay_time,texture_id,technology,optimal_scale,create_time,update_time
+    from zip_order_form
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zip_order_form
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jianwu.example.ZipOrderFormExample" >
+    delete from zip_order_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jianwu.domain.ZipOrderForm" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into zip_order_form (order_date, commodity_id, commodity_name,
+    commodity_picture, wechat_user_id, address_id,
+    address, number, price,
+    total_amount, express, order_number,
+    tracking_type, tracking_number, express_type,
+    status, sent_time, pay_time,
+    texture_id, technology, optimal_scale,
+    create_time, update_time)
+    values (#{orderDate,jdbcType=TIMESTAMP}, #{commodityId,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR},
+    #{commodityPicture,jdbcType=VARCHAR}, #{wechatUserId,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER},
+    #{address,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE},
+    #{totalAmount,jdbcType=DOUBLE}, #{express,jdbcType=DOUBLE}, #{orderNumber,jdbcType=VARCHAR},
+    #{trackingType,jdbcType=VARCHAR}, #{trackingNumber,jdbcType=VARCHAR}, #{expressType,jdbcType=INTEGER},
+    #{status,jdbcType=INTEGER}, #{sentTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP},
+    #{textureId,jdbcType=INTEGER}, #{technology,jdbcType=INTEGER}, #{optimalScale,jdbcType=INTEGER},
+    #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jianwu.domain.ZipOrderForm" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into zip_order_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderDate != null" >
+        order_date,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="commodityPicture != null" >
+        commodity_picture,
+      </if>
+      <if test="wechatUserId != null" >
+        wechat_user_id,
+      </if>
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="express != null" >
+        express,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="trackingType != null" >
+        tracking_type,
+      </if>
+      <if test="trackingNumber != null" >
+        tracking_number,
+      </if>
+      <if test="expressType != null" >
+        express_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sentTime != null" >
+        sent_time,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="textureId != null" >
+        texture_id,
+      </if>
+      <if test="technology != null" >
+        technology,
+      </if>
+      <if test="optimalScale != null" >
+        optimal_scale,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderDate != null" >
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPicture != null" >
+        #{commodityPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatUserId != null" >
+        #{wechatUserId,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="express != null" >
+        #{express,jdbcType=DOUBLE},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingType != null" >
+        #{trackingType,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingNumber != null" >
+        #{trackingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="expressType != null" >
+        #{expressType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sentTime != null" >
+        #{sentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="textureId != null" >
+        #{textureId,jdbcType=INTEGER},
+      </if>
+      <if test="technology != null" >
+        #{technology,jdbcType=INTEGER},
+      </if>
+      <if test="optimalScale != null" >
+        #{optimalScale,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jianwu.example.ZipOrderFormExample" resultType="java.lang.Integer" >
+    select count(*) from zip_order_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update zip_order_form
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderDate != null" >
+        order_date = #{record.orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commodityId != null" >
+        commodity_id = #{record.commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.commodityName != null" >
+        commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commodityPicture != null" >
+        commodity_picture = #{record.commodityPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechatUserId != null" >
+        wechat_user_id = #{record.wechatUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressId != null" >
+        address_id = #{record.addressId,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.express != null" >
+        express = #{record.express,jdbcType=DOUBLE},
+      </if>
+      <if test="record.orderNumber != null" >
+        order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trackingType != null" >
+        tracking_type = #{record.trackingType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trackingNumber != null" >
+        tracking_number = #{record.trackingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressType != null" >
+        express_type = #{record.expressType,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.sentTime != null" >
+        sent_time = #{record.sentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payTime != null" >
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.textureId != null" >
+        texture_id = #{record.textureId,jdbcType=INTEGER},
+      </if>
+      <if test="record.technology != null" >
+        technology = #{record.technology,jdbcType=INTEGER},
+      </if>
+      <if test="record.optimalScale != null" >
+        optimal_scale = #{record.optimalScale,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update zip_order_form
+    set id = #{record.id,jdbcType=INTEGER},
+    order_date = #{record.orderDate,jdbcType=TIMESTAMP},
+    commodity_id = #{record.commodityId,jdbcType=INTEGER},
+    commodity_name = #{record.commodityName,jdbcType=VARCHAR},
+    commodity_picture = #{record.commodityPicture,jdbcType=VARCHAR},
+    wechat_user_id = #{record.wechatUserId,jdbcType=INTEGER},
+    address_id = #{record.addressId,jdbcType=INTEGER},
+    address = #{record.address,jdbcType=VARCHAR},
+    number = #{record.number,jdbcType=INTEGER},
+    price = #{record.price,jdbcType=DOUBLE},
+    total_amount = #{record.totalAmount,jdbcType=DOUBLE},
+    express = #{record.express,jdbcType=DOUBLE},
+    order_number = #{record.orderNumber,jdbcType=VARCHAR},
+    tracking_type = #{record.trackingType,jdbcType=VARCHAR},
+    tracking_number = #{record.trackingNumber,jdbcType=VARCHAR},
+    express_type = #{record.expressType,jdbcType=INTEGER},
+    status = #{record.status,jdbcType=INTEGER},
+    sent_time = #{record.sentTime,jdbcType=TIMESTAMP},
+    pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+    texture_id = #{record.textureId,jdbcType=INTEGER},
+    technology = #{record.technology,jdbcType=INTEGER},
+    optimal_scale = #{record.optimalScale,jdbcType=INTEGER},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jianwu.domain.ZipOrderForm" >
+    update zip_order_form
+    <set >
+      <if test="orderDate != null" >
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodityId != null" >
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPicture != null" >
+        commodity_picture = #{commodityPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatUserId != null" >
+        wechat_user_id = #{wechatUserId,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null" >
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="express != null" >
+        express = #{express,jdbcType=DOUBLE},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingType != null" >
+        tracking_type = #{trackingType,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingNumber != null" >
+        tracking_number = #{trackingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="expressType != null" >
+        express_type = #{expressType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sentTime != null" >
+        sent_time = #{sentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="textureId != null" >
+        texture_id = #{textureId,jdbcType=INTEGER},
+      </if>
+      <if test="technology != null" >
+        technology = #{technology,jdbcType=INTEGER},
+      </if>
+      <if test="optimalScale != null" >
+        optimal_scale = #{optimalScale,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jianwu.domain.ZipOrderForm" >
+    update zip_order_form
+    set order_date = #{orderDate,jdbcType=TIMESTAMP},
+    commodity_id = #{commodityId,jdbcType=INTEGER},
+    commodity_name = #{commodityName,jdbcType=VARCHAR},
+    commodity_picture = #{commodityPicture,jdbcType=VARCHAR},
+    wechat_user_id = #{wechatUserId,jdbcType=INTEGER},
+    address_id = #{addressId,jdbcType=INTEGER},
+    address = #{address,jdbcType=VARCHAR},
+    number = #{number,jdbcType=INTEGER},
+    price = #{price,jdbcType=DOUBLE},
+    total_amount = #{totalAmount,jdbcType=DOUBLE},
+    express = #{express,jdbcType=DOUBLE},
+    order_number = #{orderNumber,jdbcType=VARCHAR},
+    tracking_type = #{trackingType,jdbcType=VARCHAR},
+    tracking_number = #{trackingNumber,jdbcType=VARCHAR},
+    express_type = #{expressType,jdbcType=INTEGER},
+    status = #{status,jdbcType=INTEGER},
+    sent_time = #{sentTime,jdbcType=TIMESTAMP},
+    pay_time = #{payTime,jdbcType=TIMESTAMP},
+    texture_id = #{textureId,jdbcType=INTEGER},
+    technology = #{technology,jdbcType=INTEGER},
+    optimal_scale = #{optimalScale,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateBatchByPrimaryKey" parameterType="java.util.List" >
+    <foreach collection="list" item="item" index="index" separator=";" >
+      update zip_order_form
+      <set >
+        order_date=#{item.orderDate,jdbcType=TIMESTAMP},
+        commodity_id=#{item.commodityId,jdbcType=INTEGER},
+        commodity_name=#{item.commodityName,jdbcType=VARCHAR},
+        commodity_picture=#{item.commodityPicture,jdbcType=VARCHAR},
+        wechat_user_id=#{item.wechatUserId,jdbcType=INTEGER},
+        address_id=#{item.addressId,jdbcType=INTEGER},
+        address=#{item.address,jdbcType=VARCHAR},
+        number=#{item.number,jdbcType=INTEGER},
+        price=#{item.price,jdbcType=DOUBLE},
+        total_amount=#{item.totalAmount,jdbcType=DOUBLE},
+        express=#{item.express,jdbcType=DOUBLE},
+        order_number=#{item.orderNumber,jdbcType=VARCHAR},
+        tracking_type=#{item.trackingType,jdbcType=VARCHAR},
+        tracking_number=#{item.trackingNumber,jdbcType=VARCHAR},
+        express_type=#{item.expressType,jdbcType=INTEGER},
+        status=#{item.status,jdbcType=INTEGER},
+        sent_time=#{item.sentTime,jdbcType=TIMESTAMP},
+        pay_time=#{item.payTime,jdbcType=TIMESTAMP},
+        texture_id=#{item.textureId,jdbcType=INTEGER},
+        technology=#{item.technology,jdbcType=INTEGER},
+        optimal_scale=#{item.optimalScale,jdbcType=INTEGER},
+        create_time=#{item.createTime,jdbcType=TIMESTAMP},
+        update_time=#{item.updateTime,jdbcType=TIMESTAMP},
+      </set>
+      where
+      id = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into zip_order_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      order_date,
+      commodity_id,
+      commodity_name,
+      commodity_picture,
+      wechat_user_id,
+      address_id,
+      address,
+      number,
+      price,
+      total_amount,
+      express,
+      order_number,
+      tracking_type,
+      tracking_number,
+      express_type,
+      status,
+      sent_time,
+      pay_time,
+      texture_id,
+      technology,
+      optimal_scale,
+      create_time,
+      update_time,
+    </trim>
+    values
+    <foreach collection="list" index="index" item="item" separator="," >
+      <trim prefix=" (" suffix=")" suffixOverrides="," >
+        #{item.id,jdbcType=INTEGER},
+        #{item.orderDate,jdbcType=TIMESTAMP},
+        #{item.commodityId,jdbcType=INTEGER},
+        #{item.commodityName,jdbcType=VARCHAR},
+        #{item.commodityPicture,jdbcType=VARCHAR},
+        #{item.wechatUserId,jdbcType=INTEGER},
+        #{item.addressId,jdbcType=INTEGER},
+        #{item.address,jdbcType=VARCHAR},
+        #{item.number,jdbcType=INTEGER},
+        #{item.price,jdbcType=DOUBLE},
+        #{item.totalAmount,jdbcType=DOUBLE},
+        #{item.express,jdbcType=DOUBLE},
+        #{item.orderNumber,jdbcType=VARCHAR},
+        #{item.trackingType,jdbcType=VARCHAR},
+        #{item.trackingNumber,jdbcType=VARCHAR},
+        #{item.expressType,jdbcType=INTEGER},
+        #{item.status,jdbcType=INTEGER},
+        #{item.sentTime,jdbcType=TIMESTAMP},
+        #{item.payTime,jdbcType=TIMESTAMP},
+        #{item.textureId,jdbcType=INTEGER},
+        #{item.technology,jdbcType=INTEGER},
+        #{item.optimalScale,jdbcType=INTEGER},
+        #{item.createTime,jdbcType=TIMESTAMP},
+        #{item.updateTime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+  </insert>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List" >
+    <foreach collection="list" item="item" index="index" separator=";" >
+      update zip_order_form
+      <set >
+        <if test="item.orderDate!=null" >
+          order_date=#{item.orderDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.commodityId!=null" >
+          commodity_id=#{item.commodityId,jdbcType=INTEGER},
+        </if>
+        <if test="item.commodityName!=null" >
+          commodity_name=#{item.commodityName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.commodityPicture!=null" >
+          commodity_picture=#{item.commodityPicture,jdbcType=VARCHAR},
+        </if>
+        <if test="item.wechatUserId!=null" >
+          wechat_user_id=#{item.wechatUserId,jdbcType=INTEGER},
+        </if>
+        <if test="item.addressId!=null" >
+          address_id=#{item.addressId,jdbcType=INTEGER},
+        </if>
+        <if test="item.address!=null" >
+          address=#{item.address,jdbcType=VARCHAR},
+        </if>
+        <if test="item.number!=null" >
+          number=#{item.number,jdbcType=INTEGER},
+        </if>
+        <if test="item.price!=null" >
+          price=#{item.price,jdbcType=DOUBLE},
+        </if>
+        <if test="item.totalAmount!=null" >
+          total_amount=#{item.totalAmount,jdbcType=DOUBLE},
+        </if>
+        <if test="item.express!=null" >
+          express=#{item.express,jdbcType=DOUBLE},
+        </if>
+        <if test="item.orderNumber!=null" >
+          order_number=#{item.orderNumber,jdbcType=VARCHAR},
+        </if>
+        <if test="item.trackingType!=null" >
+          tracking_type=#{item.trackingType,jdbcType=VARCHAR},
+        </if>
+        <if test="item.trackingNumber!=null" >
+          tracking_number=#{item.trackingNumber,jdbcType=VARCHAR},
+        </if>
+        <if test="item.expressType!=null" >
+          express_type=#{item.expressType,jdbcType=INTEGER},
+        </if>
+        <if test="item.status!=null" >
+          status=#{item.status,jdbcType=INTEGER},
+        </if>
+        <if test="item.sentTime!=null" >
+          sent_time=#{item.sentTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.payTime!=null" >
+          pay_time=#{item.payTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.textureId!=null" >
+          texture_id=#{item.textureId,jdbcType=INTEGER},
+        </if>
+        <if test="item.technology!=null" >
+          technology=#{item.technology,jdbcType=INTEGER},
+        </if>
+        <if test="item.optimalScale!=null" >
+          optimal_scale=#{item.optimalScale,jdbcType=INTEGER},
+        </if>
+        <if test="item.createTime!=null" >
+          create_time=#{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.updateTime!=null" >
+          update_time=#{item.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where
+      id = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+  <!--分页模糊查询订单列表-->
+  <select id="queryLike" resultType="com.jianwu.domain.result.ZipOrderFormResponse">
+    select ff.*,z.texture_id,z.technology from (
+    select f.*,u.nick_name,u.open_id from zip_order_form f left join zip_wechat_user u on  f.wechat_user_id = u.id
+    <where>
+      status !=-1
+      <if test="sTime!=null" >
+        and  DATE_FORMAT(f.create_time,'%y-%m-%d') >= DATE_FORMAT(#{sTime},'%y-%m-%d')
+      </if>
+      <if test="eTime!=null" >
+        and   DATE_FORMAT(#{eTime},'%y-%m-%d')>= DATE_FORMAT(f.create_time,'%y-%m-%d')
+      </if>
+      <if test="status!=null" >
+        and f.status = #{status}
+      </if>
+      <if test="wechatUserName!=null and wechatUserName!=''" >
+        and f.wechat_user_id in (select w.id from zip_wechat_user w where w.nick_name like CONCAT('%', #{wechatUserName} , '%'))
+      </if>
+      <if test="orderNumber!=null and orderNumber!=''" >
+        and f.order_number like CONCAT('%', #{orderNumber} , '%')
+      </if>
+      <if test="wechatUserId!=null" >
+        and f.wechat_user_id = #{wechatUserId}
+      </if>
+    </where>
+    ) ff left join zip_commodity z on ff.commodity_id = z.id order by ff.optimal_scale,ff.create_time desc
+    limit #{start},#{end}
+  </select>
+
+  <!--模糊查询订单条数-->
+  <select id="queryLikeCount" resultType="int">
+    select count(*) from (
+    select f.*,u.nick_name,u.open_id from zip_order_form f left join zip_wechat_user u on  f.wechat_user_id = u.id
+    <where>
+      status !=-1
+      <if test="sTime!=null" >
+        and  DATE_FORMAT(f.create_time,'%y-%m-%d') >= DATE_FORMAT(#{sTime},'%y-%m-%d')
+      </if>
+      <if test="eTime!=null" >
+        and   DATE_FORMAT(#{eTime},'%y-%m-%d')>= DATE_FORMAT(f.create_time,'%y-%m-%d')
+      </if>
+      <if test="status!=null" >
+        and f.status = #{status}
+      </if>
+      <if test="wechatUserName!=null and wechatUserName!=''" >
+        and f.wechat_user_id in (select w.id from zip_wechat_user w where w.nick_name like CONCAT('%', #{wechatUserName} , '%'))
+      </if>
+      <if test="orderNumber!=null and orderNumber!=''" >
+        and f.order_number like CONCAT('%', #{orderNumber} , '%')
+      </if>
+      <if test="wechatUserId!=null" >
+        and f.wechat_user_id = #{wechatUserId}
+      </if>
+    </where>
+    ) ff left join zip_commodity z on ff.commodity_id = z.id
+  </select>
+
+</mapper>
